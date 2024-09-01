@@ -97,5 +97,36 @@ CREATE TABLE StockMovements (
 INSERT INTO StockMovements (ProductID, Quantity, MovementDate, MovementType) VALUES 
 (1, -2, '2024-09-01 13:00:00', 'Çıkış');  -- 1 numaralı üründen 2 adet çıkış yapılmıştır
 
+CREATE TABLE Employees (
+    EmployeeID SERIAL PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Role VARCHAR(50) CHECK(Role IN ('Yönetici', 'Garson', 'Şef')),
+    HireDate DATE NOT NULL,
+    Salary DECIMAL NOT NULL
+);
+
+CREATE TABLE Reservations (
+    ReservationID SERIAL PRIMARY KEY,
+    CustomerID INTEGER REFERENCES Customers(CustomerID),
+    TableID INTEGER REFERENCES RestaurantTables(TableID),
+    ReservationDate TIMESTAMP NOT NULL,
+    NumberOfGuests INTEGER NOT NULL,
+    Status VARCHAR(50) CHECK(Status IN ('Pending', 'Confirmed', 'Cancelled')) NOT NULL
+);
+
+CREATE TABLE RestaurantTables (
+    TableID SERIAL PRIMARY KEY,
+    TableNumber INTEGER NOT NULL UNIQUE,
+    Capacity INTEGER NOT NULL
+);
+
+CREATE TABLE Payments (
+    PaymentID SERIAL PRIMARY KEY,
+    OrderID INTEGER REFERENCES Orders(OrderID),
+    PaymentDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PaymentMethod VARCHAR(50) CHECK(PaymentMethod IN ('Kredi Kartı', 'Nakit', 'Çek')),
+    Amount DECIMAL NOT NULL
+);
 
 -- SELECT * from Users
