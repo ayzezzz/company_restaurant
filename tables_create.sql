@@ -10,7 +10,14 @@ CREATE TABLE Users (
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO Users (UserName, Email, Password, Role) VALUES ('John Doe', 'john.doe@example.com', 'securepassword', 'Admin');
+
+INSERT INTO Users (UserName, Email, Password, Role) VALUES 
+('Alice Smith', 'alice.smith@example.com', 'password123', 'Admin'),
+('Bob Johnson', 'bob.johnson@example.com', 'password456', 'Waiter'),
+('Charlie Brown', 'charlie.brown@example.com', 'password789', 'Waiter'),
+('Diana Prince', 'diana.prince@example.com', 'password321', 'Admin'),
+('Eve Adams', 'eve.adams@example.com', 'password654', 'Waiter');
+
 
 CREATE TABLE Customers (
     CustomerID SERIAL PRIMARY KEY,
